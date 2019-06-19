@@ -5,24 +5,26 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ConsoleLetterChanges {
-    // Пусть функция LetterChanges(str) примет передаваемый параметр str и изменит его, используя следующий алгоритм.
-    //Замените каждую букву в строке буквой, следующей за ней в алфавите(т.е.c становится d, z становится a). 
-    //Затем используйте каждый гласный в этой новой строке(a, e, i, o, u) и, наконец, верните эту измененную строку.
+    //На входе вводим строку.Изменить каждую букву в строке на следующую букву по алфавиту и вывести новую строку
     class Program {
         public static string LetterChanges(string str) {
-            //string alfavitArr = "a", "b", "c", "d", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" };
-        string alfavitArr = "a b c d f g h i j k l m n o p q r s t u v w x y z";
-            string[] words = alfavitArr.Split(' '); //разделяем строку по пробелам для записи в промежуточный массив
-            string[] strWords = str.Split(' ');
-            var findCollection = new List<string>();
-            for (var i = 0; i < words.Length; i++) {
-                for (var j = 0; j < strWords.Length; j++) {
-                    if (strWords[j].Contains(words[i])) {
-                        findCollection.Add(words[i]);
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < str.Length; i++) {
+                if (str[i] >= 'a' && str[i] <= 'z') {
+                    switch (str[i]) {
+                        case 'z': sb.Append('A'); break;
+                        case 'd': sb.Append('E'); break;
+                        case 'h': sb.Append('I'); break;
+                        case 'n': sb.Append('O'); break;
+                        case 't': sb.Append('U'); break;
+                        default: sb.Append((char)(str[i] + 1)); break;
                     }
                 }
+                else {
+                    sb.Append(str[i]);
+                }
             }
-            return str;
+            return sb.ToString();
         }
         static void Main() {
             Console.WriteLine(LetterChanges(Console.ReadLine()));
